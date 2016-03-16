@@ -1,0 +1,10 @@
+vsftpd:
+  image: tukiyo3/openwrt-ftpd
+  restart: always
+  ports:
+    - "21:21"
+    - "65000-65100:65000-65100"
+  volumes:
+    - ./vol/:/data/
+  environment:
+    - HOST=localhost

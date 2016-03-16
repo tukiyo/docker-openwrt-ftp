@@ -1,7 +1,7 @@
-## -*- docker-image-name: "mcreations/openwrt-ftp" -*-
+## -*- docker-image-name: "tukiyo3/openwrt-ftp" -*-
 
-FROM mcreations/openwrt-x64
-MAINTAINER Kambiz Darabi <darabi@m-creations.net>
+FROM mcreations/ftp
+MAINTAINER tukiyo3 <tukiyo3@gmail.com>
 
 ENV FTP_USER ftp
 ENV FTP_PASS changeit
@@ -22,5 +22,6 @@ RUN opkg update &&\
 
 EXPOSE 21
 EXPOSE 65000-65100
+VOLUME /data/
 
 CMD ["/start-ftp"]

@@ -17,19 +17,35 @@ fi
 mkdir -m 0700 -p /var/empty
 mkdir -m 0755 -p /var/run
 
-existing=$(grep $FTP_USER /etc/passwd | cut -f 1 -d :)
-
 mkdir -m 0755 -p /data
 chown root:root /data
 
-if [ "$existing" = "$FTP_USER" ] ; then
-    usermod -d /data/$FTP_USER -s /bin/false -g ftp -p $(openssl passwd $FTP_PASS) $FTP_USER
-else
-    useradd -d /data/$FTP_USER -s /bin/false -g ftp -p $(openssl passwd $FTP_PASS) $FTP_USER
-fi
+userctl() {
+    existing=$(grep $FTP_USER /etc/passwd | cut -f 1 -d :)
+    
+    HOMEDIR=/data/$FTP_USER
+    if [ ! -z "$HOME_DIR" ];then
+        HOMEDIR=/data/$HOME_DIR
+    fi
 
-mkdir -p /data/$FTP_USER/incoming
-chown -R $FTP_USER:ftp /data/$FTP_USER
+    if [ "$existing" = "$FTP_USER" ] ; then
+        usermod -d $HOMEDIR -s /bin/false -g ftp -p $(openssl passwd $FTP_PASS) $FTP_USER
+    else
+        useradd -d $HOMEDIR -s /bin/false -g ftp -p $(openssl passwd $FTP_PASS) $FTP_USER
+    fi
+    
+    mkdir -p /data/$FTP_USER/incoming
+    chown -R $FTP_USER:ftp /data/$FTP_USER
+}
+readline() {
+    cat /users.txt | while read line; do
+        FTP_USER=`echo $line | awk '{print $1}'`
+        FTP_PASS=`echo $line | awk '{print $2}'`
+        HOME_DIR=`echo $line | awk '{print $3}'`
+        userctl $FTP_USER $FTP_PASS $HOME_DIR
+    done;
+}
+readline
 
 cat <<EOF> /etc/vsftpd.conf
 
@@ -38,7 +54,7 @@ listen=YES
 anonymous_enable=NO
 local_enable=YES
 write_enable=YES
-local_umask=022
+local_umask=000
 check_shell=NO
 session_support=NO
 chroot_local_user=YES
