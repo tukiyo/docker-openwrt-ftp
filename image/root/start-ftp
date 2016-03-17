@@ -34,8 +34,8 @@ userctl() {
         useradd -d $HOMEDIR -s /bin/false -g ftp -p $(openssl passwd $FTP_PASS) $FTP_USER
     fi
     
-    mkdir -p /data/$FTP_USER/incoming
-    chown -R $FTP_USER:ftp /data/$FTP_USER
+    mkdir -p $HOMEDIR
+    chown -R $FTP_USER:ftp $HOMEDIR
 }
 readline() {
     cat /users.txt | while read line; do
