@@ -31,8 +31,12 @@ user4   pass    share
 user5   pass    share
 ```
 
-3番目の内容`share`はPATHを`/data/share/`でログイン。
-user3, user4, user5は`/data/share/`を利用。
+* 1行目: FTPのユーザ名
+* 2行目: FTPのパスワード
+* 3行目: ログインするPATHを`/data/share/`に指定。
+    * user3, user4, user5は`/data/share/`を利用。
+    * user1は/data/user1/
+    * user2は/data/user2/を利用。
 
 ## 起動方法
 
