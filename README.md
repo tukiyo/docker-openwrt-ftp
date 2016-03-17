@@ -1,23 +1,30 @@
+# 起動方法
+
+```
+git clone https://github.com/tukiyo/docker-openwrt-ftp.git
+cd docker-openwrt-ftp
+```
+
+```ruby:docker-compose.yml
+  environment:
+    #- HOST=my.server.com
+    - HOST=localhost
+    #- HOST=192.168.100.70
+```
+
+* (PASVのため) 自サーバ以外から接続する場合
+    * `HOST`の値をIPアドレスか、名前解決が出きるホスト名を指定
+
+
+```bash:
+docker-compose up -d
+```
+
 # docker-openwrt-ftp
 
 * [mcreations/ftp](https://hub.docker.com/r/mcreations/ftp/)を改良
 * 複数アカウント作成に対応
 * HOMEディレクトリを他のユーザと同じPATHを指定可能
-
-## ホスト名設定
-
-* docker-compose.yml
-
-```
-  environment:
-    #- HOST=my.server.com
-    - HOST=localhost
-    #- HOST=192.168.10.7
-```
-
-* PASVのため、自サーバ以外から接続する場合
-    * `HOST`の値をIPアドレスか
-    * 名前解決が出きるホスト名を指定する必要があります
 
 ## アカウント設定
 
@@ -37,9 +44,3 @@ user5   pass    share
     * user3, user4, user5は`/data/share/`を利用。
     * user1は/data/user1/
     * user2は/data/user2/を利用。
-
-## 起動方法
-
-```
-docker-compose up -d
-```
