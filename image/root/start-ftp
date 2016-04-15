@@ -36,6 +36,11 @@ userctl() {
     
     mkdir -m 0775 -p $HOMEDIR
     chown -R $FTP_USER:ftp $HOMEDIR
+
+    # text_userdb_names
+    mkdir -m 0755 -p $HOMEDIR/etc
+    cp -a /etc/passwd $HOMEDIR/etc/passwd
+    cp -a /etc/group $HOMEDIR/etc/group
 }
 readline() {
     cat /users.txt | while read line; do
@@ -74,6 +79,7 @@ port_promiscuous=NO
 seccomp_sandbox=NO
 
 log_ftp_protocol=YES
+text_userdb_names=YES
 EOF
 
 /etc/init.d/vsftpd start
