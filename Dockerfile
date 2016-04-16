@@ -19,6 +19,7 @@ ADD image/root/ /
 RUN opkg update &&\
     opkg install --force-checksum vsftpd shadow-useradd shadow-groupadd shadow-usermod openssl-util &&\
     rm /tmp/opkg-lists/*
+COPY image/root/localtime-JST-9 /tmp/localtime
 
 EXPOSE 21
 EXPOSE 65000-65100

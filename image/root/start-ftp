@@ -41,6 +41,8 @@ userctl() {
     mkdir -m 0755 -p $HOMEDIR/etc
     cp -a /etc/passwd $HOMEDIR/etc/passwd
     cp -a /etc/group $HOMEDIR/etc/group
+    # set timezone
+    cp /etc/localtime $HOMEDIR/etc/localtime
 }
 readline() {
     cat /users.txt | while read line; do
