@@ -25,6 +25,11 @@ docker-compose up -d
 * [mcreations/ftp](https://hub.docker.com/r/mcreations/ftp/)を改良
 * 複数アカウント作成に対応
 * HOMEディレクトリを他のユーザと同じPATHを指定可能
+* (chrootにより)所有者がUIDで表示されていたのでUsername表示の対応
+* timezoneの初期値をJST-9(つまり日本)に設定。
+
+![ftp.png](https://qiita-image-store.s3.amazonaws.com/0/25728/ce43ba7f-dbbb-004a-0754-ce2473e6cdbb.png)
+
 
 ## アカウント設定
 
