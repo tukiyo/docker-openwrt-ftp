@@ -82,6 +82,7 @@ seccomp_sandbox=NO
 
 log_ftp_protocol=YES
 text_userdb_names=YES
+use_localtime=YES
 EOF
 
 /etc/init.d/vsftpd start
